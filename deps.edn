@@ -1,7 +1,22 @@
 {:paths   ["src/clj" "resources"]
+
  :deps    {org.clojure/clojure       {:mvn/version "1.10.1"}
-           org.clojure/clojurescript {:mvn/version "1.10.520"}
            metosin/reitit            {:mvn/version "0.5.6"}
-           ring/ring-jetty-adapter   {:mvn/version "1.7.1"}}
- :aliases {:server {:main-opts  ["-m" "app.server"]
+           ring/ring-jetty-adapter   {:mvn/version "1.7.1"}
+           org.clojure/data.json {:mvn/version "1.0.0"}
+           ring/ring-mock {:mvn/version "0.4.0"}
+           ring-cors {:mvn/version "0.1.13"}}
+
+ :aliases {:test {:extra-paths ["test"]
+                  :extra-deps {org.clojure/test.check {:mvn/version "1.1.0"}}}
+
+           :runner {:extra-deps {com.cognitect/test-runner
+                                 {:git/url "https://github.com/cognitect-labs/test-runner"
+                                  :sha "76568540e7f40268ad2b646110f237a60295fa3c"}}
+
+                    :main-opts  ["-m" "cognitect.test-runner"
+                                 "-d" "test"]}
+
+           :server {:main-opts  ["-m" "app.server"]
                     :extra-deps {}}}}
+
