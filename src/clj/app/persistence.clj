@@ -49,6 +49,10 @@
    ; recur with a default role of :user
    (create-user* db-atom username password :user))
   ([db-atom username password role]
+   ;; serious note: 
+   ;; we need to separate password checking functionality from here, and
+   ;; depending on checking them using specs in requests.
+
    ; if there are any password violations
    (if-let [password-violations (not-empty (password-rules password))]
      ; then throw an exception with the violation codes
